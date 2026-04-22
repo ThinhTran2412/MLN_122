@@ -726,6 +726,29 @@
       pointer-events: none;
       user-select: none;
     }
+
+    /* ─── MECHANISM PILL ─── */
+    .mech-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 5px 14px 5px 8px;
+      border: 1px solid rgba(var(--gold-rgb), 0.2);
+      background: rgba(var(--gold-rgb), 0.04);
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(201, 168, 76, 0.7);
+    }
+
+    .mech-pill-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--gold);
+      flex-shrink: 0;
+    }
   </style>
 </head>
 
@@ -1266,18 +1289,48 @@
         style="display:grid; grid-template-columns:4fr 8fr; grid-template-rows:auto auto; gap:1.5rem; margin-bottom:1.5rem;"
         class="grid-1-col-mobile">
 
-        <!-- Nhà nước -->
+        <!-- ══ NHÀN NƯỚC — UPDATED ══ -->
         <div class="glass bento-card glow-hover reveal"
-          style="padding:2.5rem; border-radius:4px; display:flex; flex-direction:column; justify-content:space-between;">
-          <div>
-            <span class="material-symbols-outlined"
-              style="color:var(--gold); font-size:2rem; margin-bottom:1rem; display:block;">account_balance</span>
-            <h4 style="font-family:'Cormorant Garamond',serif; font-size:1.5rem; margin-bottom:1rem; color:#E8E4DC;">Nhà
-              Nước</h4>
-            <p style="color:#A09890; font-size:0.9rem; line-height:1.8; font-weight:300;">Tạo cơ chế điều tiết hợp lý
-              nguồn cung khan hiếm, tăng ngân sách bền vững thay vì dựa dẫm phí đất đai truyền thống.</p>
+          style="padding:2.5rem; border-radius:4px; display:flex; flex-direction:column; justify-content:space-between; position:relative; overflow:hidden;">
+          <span class="num-deco" style="right:-0.5rem; bottom:-2rem; font-size:5rem;">NN</span>
+          <div style="position:relative; z-index:1;">
+            <div style="display:flex; align-items:center; gap:0.75rem; margin-bottom:1.5rem;">
+              <span class="material-symbols-outlined" style="color:var(--gold); font-size:2rem;">account_balance</span>
+              <div class="section-eyebrow" style="font-size:9px;">Trục Quyền Lực</div>
+            </div>
+            <h4
+              style="font-family:'Cormorant Garamond',serif; font-size:1.7rem; margin-bottom:1rem; color:#E8E4DC; line-height:1.2;">
+              Nhà Nước<br /><span style="color:var(--gold); font-style:italic; font-size:1.1rem;">Kiến Tạo Hành
+                Lang</span></h4>
+
+            <!-- Động lực kinh tế -->
+            <div style="margin-bottom:1.25rem;">
+              <div class="mech-pill" style="margin-bottom:0.75rem;">
+                <span class="mech-pill-dot"></span>Động Lực Kinh Tế
+              </div>
+              <p style="color:#A09890; font-size:0.88rem; line-height:1.8; font-weight:300;">
+                Áp dụng thuế không đơn thuần là tăng thu ngân sách — đây là xung lực để Nhà nước hoàn thiện <em
+                  style="color:rgba(201,168,76,0.8); font-style:normal;">Mã định danh BĐS</em>, xây dựng hệ thống quản
+                lý dữ liệu minh bạch. Lợi ích thu được được tái đầu tư vào hạ tầng, tạo ra giá trị thặng dư cho toàn xã
+                hội.
+              </p>
+            </div>
+
+            <!-- Cơ chế hài hoà -->
+            <div style="margin-bottom:1.5rem;">
+              <div class="mech-pill" style="margin-bottom:0.75rem;">
+                <span class="mech-pill-dot"></span>Cơ Chế Hài Hoà
+              </div>
+              <p style="color:#A09890; font-size:0.88rem; line-height:1.8; font-weight:300;">
+                Thay vì can thiệp hành chính cưỡng chế quyền sở hữu, Nhà nước dùng <em
+                  style="color:rgba(201,168,76,0.8); font-style:normal;">công cụ thuế để định hướng hành vi</em> — giải
+                quyết mâu thuẫn giữa quản lý vĩ mô và tự do kinh doanh một cách văn minh, làm thị trường minh bạch mà
+                không gây sốc.
+              </p>
+            </div>
           </div>
-          <div style="margin-top:2rem; border-top:1px solid rgba(201,168,76,0.1); padding-top:1rem;">
+
+          <div style="border-top:1px solid rgba(201,168,76,0.1); padding-top:1rem;">
             <span style="font-size:9px; letter-spacing:0.2em; text-transform:uppercase; color:var(--gold);">Mục Tiêu:
               Công Bằng Xã Hội</span>
           </div>
@@ -1308,24 +1361,51 @@
       </div>
 
       <div style="display:grid; grid-template-columns:1fr 1fr; gap:1.5rem;" class="grid-1-col-mobile">
-        <!-- Người lao động -->
+
+        <!-- ══ NGƯỜI LAO ĐỘNG — UPDATED ══ -->
         <div class="glass bento-card reveal delay-2"
-          style="padding:2.5rem; border-radius:4px; display:flex; gap:2rem; overflow:hidden;">
-          <div style="flex:1;">
-            <h4 style="font-family:'Cormorant Garamond',serif; font-size:1.5rem; margin-bottom:1rem; color:#E8E4DC;">
-              Người Lao Động</h4>
-            <p style="color:#A09890; font-size:0.9rem; line-height:1.8; margin-bottom:1.5rem; font-weight:300;">Giảm rào
-              cản tài chính vô hình, mở cơ hội sở hữu nhà ở thực sự cho tầng lớp người trẻ giữa áp lực lạm phát.</p>
-            <div
-              style="background:rgba(201,168,76,0.05); border:1px solid rgba(201,168,76,0.1); padding:1rem 1.25rem; border-radius:2px;">
-              <span style="font-size:0.88rem; color:rgba(201,168,76,0.8); font-style:italic;">"Cánh cửa hạn hẹp cho an
-                cư đã được nới rộng."</span>
+          style="padding:2.5rem; border-radius:4px; display:flex; flex-direction:column; gap:0; overflow:hidden; position:relative;">
+          <span class="num-deco" style="right:-0.5rem; top:-1rem; font-size:5rem; bottom:auto;">NLĐ</span>
+          <div style="position:relative; z-index:1; flex:1;">
+            <div style="display:flex; align-items:center; gap:0.75rem; margin-bottom:1.25rem;">
+              <span class="material-symbols-outlined" style="color:var(--gold); font-size:1.8rem;">engineering</span>
+              <div class="section-eyebrow" style="font-size:9px;">Trục Lao Động</div>
             </div>
-          </div>
-          <div style="width:130px; flex-shrink:0; border-radius:2px; overflow:hidden;" class="hidden md:block">
-            <img
-              src="https://lh3.googleusercontent.com/aida-public/AB6AXuAx7FE7R1c-rybjUfitDne_zD-rrdzUi8987-OB8WJosGbRsg1zjv9yGycaYGXcTx4p-HXgw-FewV2Q92XTNRmSNRokK7DEkohI-CgTfcQumbizV4Td09u8wKzaBs9tmxXgVSXuMY5dhs3iGfolGOyvjkL1-QUCMeaOf1LLUzw7tbjPDWr9ybDJe9G7g8o6sHCe8sf8Ur_VzDKuCz93BmVmft5uH-ObisxtbsmTATfux-T9g-QCeEEpEknH8sCx__eG88hu--IrC7m8"
-              alt="" style="width:100%; height:100%; object-fit:cover; filter:grayscale(1) brightness(0.6);">
+            <h4
+              style="font-family:'Cormorant Garamond',serif; font-size:1.7rem; margin-bottom:0.5rem; color:#E8E4DC; line-height:1.2;">
+              Người Lao Động<br /><span style="color:var(--gold); font-style:italic; font-size:1.1rem;">Đòn Bẩy Năng
+                Suất</span>
+            </h4>
+
+            <!-- Lợi ích là đòn bẩy -->
+            <div style="margin-bottom:1.25rem; margin-top:1rem;">
+              <div class="mech-pill" style="margin-bottom:0.75rem;">
+                <span class="mech-pill-dot"></span>Lợi Ích Là Đòn Bẩy Năng Suất
+              </div>
+              <p style="color:#A09890; font-size:0.88rem; line-height:1.8; font-weight:300;">
+                Nhu cầu sở hữu nhà ở là lợi ích vật chất thiết yếu nhất. Khi chính sách thuế giảm áp lực đầu cơ, đưa giá
+                nhà về gần với <em style="color:rgba(201,168,76,0.8); font-style:normal;">giá trị thực</em>, nó tạo ra
+                "kỳ vọng tài sản khả thi" — ngọn lửa thúc đẩy hành động.
+              </p>
+            </div>
+
+            <!-- Mối quan hệ nhân quả -->
+            <div style="margin-bottom:1.5rem;">
+              <div class="mech-pill" style="margin-bottom:0.75rem;">
+                <span class="mech-pill-dot"></span>Mối Quan Hệ Nhân Quả
+              </div>
+              <p style="color:#A09890; font-size:0.88rem; line-height:1.8; font-weight:300;">
+                Chính hy vọng sở hữu mái ấm kích thích người lao động nâng cao tay nghề và tăng năng suất để tích lũy
+                tài chính. <em style="color:rgba(201,168,76,0.8); font-style:normal;">Lợi ích cá nhân (mua nhà) và lợi
+                  ích quốc gia (tăng năng suất)</em> đạt thống nhất hoàn hảo qua chính sách điều tiết.
+              </p>
+            </div>
+
+            <div
+              style="background:rgba(201,168,76,0.05); border:1px solid rgba(201,168,76,0.12); padding:1rem 1.25rem; border-radius:2px;">
+              <span style="font-size:0.88rem; color:rgba(201,168,76,0.8); font-style:italic;">"Cánh cửa hạn hẹp cho an
+                cư đã được nới rộng — và với nó, cả một thế hệ bừng dậy."</span>
+            </div>
           </div>
         </div>
 
@@ -1806,7 +1886,6 @@
       'Thuế Số TMĐT', 'AI & Bán Dẫn', 'Kỷ Nguyên Mới', 'Công Bằng Xã Hội'
     ];
     const tickerEl = document.getElementById('ticker');
-    // Duplicate for seamless loop
     const doubled = [...tickerItems, ...tickerItems];
     tickerEl.innerHTML = doubled.map(t =>
       `<span style="display:inline-flex; align-items:center; gap:0; white-space:nowrap; flex-shrink:0;">` +
@@ -1821,7 +1900,6 @@
       'Tự Do', '✦', 'Công Bằng', '✦', 'Sáng Tạo', '✦', 'Đổi Mới', '✦'
     ];
     const mt = document.getElementById('marquee-track');
-    // Duplicate 4x for seamless infinite loop
     const rpt = [...marqueeWords, ...marqueeWords, ...marqueeWords, ...marqueeWords];
     mt.innerHTML = rpt.map((w, i) => {
       const isDiamond = w === '✦';
