@@ -1,0 +1,1904 @@
+<!DOCTYPE html>
+<html class="dark" lang="vi">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Triết Lý Kinh Tế — Tập II</title>
+
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=DM+Sans:ital,opsz,wght@0,9..40,200;0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300;1,9..40,400&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap"
+    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+    rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            gold: "#C9A84C",
+            "gold-light": "#E8C96B",
+            "gold-dim": "#8B6F2E",
+            "gold-pale": "#F5E6B8",
+            ink: "#0A0B0C",
+            "ink-soft": "#111315",
+            "ink-mid": "#1A1C1E",
+            "ink-high": "#242628",
+            parchment: "#F0EAD6",
+            "text-primary": "#E8E4DC",
+            "text-secondary": "#A09890",
+            "text-muted": "#5C5650",
+            "border-dim": "#2A2C2E",
+            "border-gold": "rgba(201,168,76,0.2)",
+          },
+          fontFamily: {
+            display: ["Cormorant Garamond", "serif"],
+            body: ["DM Sans", "sans-serif"],
+            serif: ["Libre Baskerville", "serif"],
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    :root {
+      --gold: #C9A84C;
+      --gold-rgb: 201, 168, 76;
+      --ink: #0A0B0C;
+      --parchment: #F0EAD6;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--ink);
+      color: #E8E4DC;
+      font-family: "DM Sans", sans-serif;
+      overflow-x: hidden;
+      cursor: none;
+    }
+
+    /* ─── CUSTOM CURSOR ─── */
+    #cursor {
+      position: fixed;
+      width: 10px;
+      height: 10px;
+      background: var(--gold);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      transition: width 0.2s, height 0.2s, opacity 0.2s;
+      mix-blend-mode: difference;
+    }
+
+    #cursor-ring {
+      position: fixed;
+      width: 36px;
+      height: 36px;
+      border: 1px solid rgba(var(--gold-rgb), 0.5);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9998;
+      transform: translate(-50%, -50%);
+      transition: all 0.12s ease;
+    }
+
+    body:hover #cursor {
+      opacity: 1;
+    }
+
+    a:hover~#cursor,
+    button:hover~#cursor {
+      width: 20px;
+      height: 20px;
+    }
+
+    /* ─── GRAIN OVERLAY ─── */
+    .grain::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      opacity: 0.035;
+      pointer-events: none;
+      z-index: 1000;
+    }
+
+    /* ─── MATERIAL SYMBOLS ─── */
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 200, 'GRAD' 0, 'opsz' 24;
+    }
+
+    /* ─── SCROLL REVEAL ─── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-left {
+      opacity: 0;
+      transform: translateX(-60px);
+      transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .reveal-left.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .reveal-right {
+      opacity: 0;
+      transform: translateX(60px);
+      transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .reveal-right.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .delay-1 {
+      transition-delay: 0.1s;
+    }
+
+    .delay-2 {
+      transition-delay: 0.2s;
+    }
+
+    .delay-3 {
+      transition-delay: 0.35s;
+    }
+
+    .delay-4 {
+      transition-delay: 0.5s;
+    }
+
+    .delay-5 {
+      transition-delay: 0.65s;
+    }
+
+    /* ─── HEADER ─── */
+    #site-header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 500;
+      padding: 1.5rem 3.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid transparent;
+      transition: all 0.6s ease;
+    }
+
+    #site-header.scrolled {
+      background: rgba(10, 11, 12, 0.92);
+      backdrop-filter: blur(24px);
+      border-color: rgba(var(--gold-rgb), 0.12);
+      padding: 1rem 3.5rem;
+    }
+
+    .nav-link {
+      font-family: "DM Sans", sans-serif;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #A09890;
+      text-decoration: none;
+      position: relative;
+      transition: color 0.3s;
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -3px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: var(--gold);
+      transition: width 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .nav-link:hover {
+      color: var(--gold);
+    }
+
+    .nav-link:hover::after {
+      width: 100%;
+    }
+
+    .nav-link.active {
+      color: var(--gold);
+    }
+
+    .nav-link.active::after {
+      width: 100%;
+    }
+
+    /* ─── HERO ─── */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+
+    .hero-bg img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: grayscale(1) brightness(0.25);
+      transform: scale(1.05);
+      transition: transform 8s ease;
+    }
+
+    #hero:hover .hero-bg img {
+      transform: scale(1.0);
+    }
+
+    .hero-bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(105deg, #0A0B0C 35%, rgba(10, 11, 12, 0.6) 70%, transparent);
+    }
+
+    .hero-ticker {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      border-top: 1px solid rgba(var(--gold-rgb), 0.15);
+      overflow: hidden;
+      background: rgba(10, 11, 12, 0.7);
+      backdrop-filter: blur(10px);
+      padding: 12px 0;
+      z-index: 10;
+    }
+
+    .ticker-inner {
+      display: flex;
+      white-space: nowrap;
+      animation: ticker 28s linear infinite;
+    }
+
+    .ticker-item {
+      font-family: "DM Sans", sans-serif;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(var(--gold-rgb), 0.6);
+      padding: 0 3rem;
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .ticker-dot {
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--gold);
+      flex-shrink: 0;
+    }
+
+    @keyframes ticker {
+      from {
+        transform: translateX(0);
+      }
+
+      to {
+        transform: translateX(-50%);
+      }
+    }
+
+    /* ─── GOLD DIVIDER ─── */
+    .gold-rule {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      opacity: 0.4;
+    }
+
+    /* ─── GLASS CARD ─── */
+    .glass {
+      background: rgba(26, 28, 30, 0.6);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(var(--gold-rgb), 0.1);
+    }
+
+    /* ─── QUOTE BLOCK ─── */
+    .quote-block {
+      position: relative;
+      padding: 4rem 5rem;
+      border: 1px solid rgba(var(--gold-rgb), 0.12);
+      background: linear-gradient(135deg, rgba(26, 28, 30, 0.8), rgba(10, 11, 12, 0.9));
+    }
+
+    .quote-block::before {
+      content: '\201C';
+      position: absolute;
+      top: -0.3em;
+      left: 1rem;
+      font-family: "Cormorant Garamond", serif;
+      font-size: 12rem;
+      color: rgba(var(--gold-rgb), 0.06);
+      line-height: 1;
+      pointer-events: none;
+    }
+
+    /* ─── STAT COUNTER ─── */
+    .stat-num {
+      font-family: "Cormorant Garamond", serif;
+      font-size: 4rem;
+      font-weight: 600;
+      color: var(--gold);
+      line-height: 1;
+    }
+
+    /* ─── BENTO GRID CARD ─── */
+    .bento-card {
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.5s ease;
+    }
+
+    .bento-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(var(--gold-rgb), 0.25);
+    }
+
+    .bento-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(var(--gold-rgb), 0.04), transparent);
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+
+    .bento-card:hover::after {
+      opacity: 1;
+    }
+
+    /* ─── PROGRESS BAR ─── */
+    .prog-bar {
+      height: 2px;
+      background: #1A1C1E;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .prog-fill {
+      height: 100%;
+      width: 0;
+      background: linear-gradient(90deg, #8B6F2E, var(--gold), #E8C96B);
+      transition: width 1.8s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+    }
+
+    .prog-fill::after {
+      content: '';
+      position: absolute;
+      right: 0;
+      top: -2px;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--gold);
+      box-shadow: 0 0 10px rgba(var(--gold-rgb), 0.8);
+    }
+
+    /* ─── ACCORDION ─── */
+    .accordion-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem 0;
+      border-bottom: 1px solid rgba(var(--gold-rgb), 0.1);
+      cursor: pointer;
+      transition: color 0.3s;
+    }
+
+    .accordion-header:hover {
+      color: var(--gold);
+    }
+
+    .accordion-icon {
+      font-size: 1.2rem;
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      color: var(--gold);
+    }
+
+    .accordion-header.open .accordion-icon {
+      transform: rotate(45deg);
+    }
+
+    .accordion-body {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.6s cubic-bezier(0.16, 1, 0.3, 1), padding 0.4s;
+    }
+
+    .accordion-body.open {
+      max-height: 400px;
+      padding-bottom: 1.5rem;
+    }
+
+    /* ─── PARALLAX SECTION ─── */
+    .parallax-img {
+      will-change: transform;
+      transition: filter 1s ease;
+    }
+
+    /* ─── HOVER TILT CARD ─── */
+    .tilt-card {
+      transform-style: preserve-3d;
+      transition: transform 0.1s ease;
+    }
+
+    .tilt-card-inner {
+      transform: translateZ(20px);
+      transition: transform 0.1s ease;
+    }
+
+    /* ─── FLOATING LABEL ─── */
+    .float-tag {
+      font-family: "DM Sans", sans-serif;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      padding: 5px 14px;
+      border: 1px solid rgba(var(--gold-rgb), 0.3);
+      display: inline-block;
+    }
+
+    /* ─── CTA BUTTON ─── */
+    .btn-gold {
+      background: var(--gold);
+      color: var(--ink);
+      font-family: "DM Sans", sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      padding: 14px 36px;
+      border: none;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-gold::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: left 0.5s ease;
+    }
+
+    .btn-gold:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(var(--gold-rgb), 0.35);
+    }
+
+    .btn-gold:hover::before {
+      left: 100%;
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--gold);
+      font-family: "DM Sans", sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      padding: 13px 36px;
+      border: 1px solid rgba(var(--gold-rgb), 0.4);
+      cursor: pointer;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-outline:hover {
+      background: rgba(var(--gold-rgb), 0.08);
+      border-color: var(--gold);
+      transform: translateY(-2px);
+    }
+
+    /* ─── SECTION LABEL ─── */
+    .section-eyebrow {
+      font-family: "DM Sans", sans-serif;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .section-eyebrow::before {
+      content: '';
+      display: inline-block;
+      width: 28px;
+      height: 1px;
+      background: var(--gold);
+    }
+
+    /* ─── DISPLAY HEADING ─── */
+    .h-display {
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(3rem, 7vw, 6rem);
+      font-weight: 600;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      color: #E8E4DC;
+    }
+
+    .h-xl {
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      font-weight: 500;
+      line-height: 1.15;
+      color: #E8E4DC;
+    }
+
+    .h-md {
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(1.5rem, 2.5vw, 2.2rem);
+      font-weight: 500;
+      line-height: 1.25;
+      color: #E8E4DC;
+    }
+
+    /* ─── READING PROGRESS BAR ─── */
+    #reading-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--gold-dim), var(--gold), #E8C96B);
+      z-index: 600;
+      transition: width 0.1s;
+      box-shadow: 0 0 8px rgba(var(--gold-rgb), 0.6);
+    }
+
+    /* ─── TIMELINE ─── */
+    .timeline-line {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 1px;
+      height: 100%;
+      background: linear-gradient(to bottom, transparent, var(--gold), transparent);
+    }
+
+    /* ─── AI TOOL CARD ─── */
+    .ai-card {
+      border: 1px solid rgba(var(--gold-rgb), 0.1);
+      background: rgba(26, 28, 30, 0.5);
+      transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .ai-card:hover {
+      border-color: rgba(var(--gold-rgb), 0.35);
+      background: rgba(26, 28, 30, 0.85);
+      transform: translateY(-6px);
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6), 0 0 30px rgba(var(--gold-rgb), 0.08);
+    }
+
+    /* ─── SCROLLBAR ─── */
+    ::-webkit-scrollbar {
+      width: 4px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: var(--ink);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: rgba(var(--gold-rgb), 0.3);
+      border-radius: 2px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--gold);
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 768px) {
+      #site-header {
+        padding: 1rem 1.5rem;
+      }
+
+      #site-header.scrolled {
+        padding: 0.75rem 1.5rem;
+      }
+
+      .quote-block {
+        padding: 2.5rem 2rem;
+      }
+
+      body {
+        cursor: auto;
+      }
+
+      #cursor,
+      #cursor-ring {
+        display: none;
+      }
+    }
+
+    /* ─── MARQUEE SECTION DIVIDER ─── */
+    .marquee-wrap {
+      overflow: hidden;
+    }
+
+    .marquee-track {
+      display: flex;
+      width: max-content;
+      animation: marquee 20s linear infinite;
+    }
+
+    .marquee-track:hover {
+      animation-play-state: paused;
+    }
+
+    @keyframes marquee {
+      0% {
+        transform: translateX(0);
+      }
+
+      100% {
+        transform: translateX(-50%);
+      }
+    }
+
+    /* ─── SELECTION ─── */
+    ::selection {
+      background: rgba(var(--gold-rgb), 0.25);
+      color: #E8E4DC;
+    }
+
+    /* ─── FOOTER ─── */
+    footer a {
+      transition: color 0.3s;
+    }
+
+    footer a:hover {
+      color: var(--gold);
+    }
+
+    /* Card glow on hover */
+    .glow-hover:hover {
+      box-shadow: 0 0 40px rgba(var(--gold-rgb), 0.08), 0 20px 60px rgba(0, 0, 0, 0.4);
+    }
+
+    /* Number line decoration */
+    .num-deco {
+      font-family: "Cormorant Garamond", serif;
+      font-size: 7rem;
+      font-weight: 700;
+      color: rgba(var(--gold-rgb), 0.04);
+      position: absolute;
+      line-height: 1;
+      pointer-events: none;
+      user-select: none;
+    }
+  </style>
+</head>
+
+<body class="grain">
+
+  <!-- Reading Progress -->
+  <div id="reading-progress" style="width:0%"></div>
+
+  <!-- Custom Cursor -->
+  <div id="cursor"></div>
+  <div id="cursor-ring"></div>
+
+  <!-- ══════════════════════════════════
+       HEADER
+  ══════════════════════════════════ -->
+  <header id="site-header">
+    <div style="display:flex; align-items:center; gap:12px;">
+      <div
+        style="width:32px; height:32px; border:1px solid rgba(201,168,76,0.4); display:flex; align-items:center; justify-content:center;">
+        <span class="material-symbols-outlined" style="color:var(--gold); font-size:18px;">account_balance</span>
+      </div>
+      <div
+        style="font-family:'Cormorant Garamond',serif; font-size:1.1rem; font-weight:600; letter-spacing:0.22em; color:var(--gold); text-transform:uppercase;">
+        Triết Lý Kinh Tế</div>
+    </div>
+
+    <nav style="display:flex; gap:2.5rem; align-items:center;" class="hidden md:flex">
+      <a class="nav-link active" href="#sec-theory">Lý Thuyết</a>
+      <a class="nav-link" href="#sec-dynamics">Động Lực</a>
+      <a class="nav-link" href="#sec-practice">Thực Tiễn</a>
+      <a class="nav-link" href="#sec-appendix">Phụ Lục</a>
+    </nav>
+
+    <button class="btn-gold hidden md:inline-flex"
+      onclick="document.querySelector('#sec-theory').scrollIntoView({behavior:'smooth'})">
+      <span class="material-symbols-outlined" style="font-size:14px;">event</span>
+      Tham Gia
+    </button>
+
+    <!-- Mobile hamburger -->
+    <button id="mobile-menu-btn" class="md:hidden"
+      style="color:var(--gold); background:none; border:none; cursor:pointer;">
+      <span class="material-symbols-outlined">menu</span>
+    </button>
+  </header>
+
+  <!-- Mobile Nav Overlay -->
+  <div id="mobile-nav"
+    style="position:fixed; inset:0; background:rgba(10,11,12,0.97); z-index:450; display:flex; flex-direction:column; justify-content:center; align-items:center; gap:2.5rem; transform:translateX(100%); transition:transform 0.5s cubic-bezier(0.16,1,0.3,1);">
+    <a class="nav-link" style="font-size:1.8rem; letter-spacing:0.15em; font-family:'Cormorant Garamond',serif;"
+      href="#sec-theory" onclick="closeMobileNav()">Lý Thuyết</a>
+    <a class="nav-link" style="font-size:1.8rem; letter-spacing:0.15em; font-family:'Cormorant Garamond',serif;"
+      href="#sec-dynamics" onclick="closeMobileNav()">Động Lực</a>
+    <a class="nav-link" style="font-size:1.8rem; letter-spacing:0.15em; font-family:'Cormorant Garamond',serif;"
+      href="#sec-practice" onclick="closeMobileNav()">Thực Tiễn</a>
+    <a class="nav-link" style="font-size:1.8rem; letter-spacing:0.15em; font-family:'Cormorant Garamond',serif;"
+      href="#sec-appendix" onclick="closeMobileNav()">Phụ Lục</a>
+    <button onclick="closeMobileNav()"
+      style="margin-top:2rem; color:rgba(201,168,76,0.5); background:none; border:none; cursor:pointer;">
+      <span class="material-symbols-outlined" style="font-size:2rem;">close</span>
+    </button>
+  </div>
+
+  <main>
+
+    <!-- ══════════════════════════════════
+         HERO SECTION
+    ══════════════════════════════════ -->
+    <section id="hero" id="sec-theory"
+      style="min-height:100vh; display:flex; align-items:flex-start; position:relative; overflow:hidden; padding-bottom:80px;">
+      <div class="hero-bg">
+        <img
+          src="https://lh3.googleusercontent.com/aida-public/AB6AXuCcuoE-N0759GIj7Olw1EEn5wP2eS6FSfU4xGcyxGA_KJunGVH6uyKbOsgOyVv2_eB_-o8LD2dy0LA_PIK3zoMQrIcB1Ac95sY40LOFeG086g9NXyNQZ7Gj3k4eLQ_Yh0ukb79UAeCo1gSLClAA5a81TqoO4BJkZuaSUuFegnHJiAi52sWgHWrYDo3KkrX1Bsu_GJl4BkAkua8E_npRjOiWvT330K_QA68FyclCUZtcgUN30KlPF59aLxWG0FEunZH-ZBifgHhUPLLD"
+          alt="" id="hero-img">
+      </div>
+
+      <div
+        style="position:relative; z-index:10; padding: 0 clamp(1.5rem, 5vw, 5rem); padding-top: clamp(8rem, 18vh, 13rem); padding-bottom: 7rem; max-width:1400px; margin:0 auto; width:100%;">
+
+        <div class="reveal" style="margin-bottom:1.5rem;">
+          <div
+            style="display:inline-flex; align-items:center; gap:10px; padding:6px 16px; border:1px solid rgba(201,168,76,0.35); background:rgba(201,168,76,0.05);">
+            <span
+              style="font-size:10px; font-weight:600; letter-spacing:0.2em; text-transform:uppercase; color:var(--gold); font-family:'DM Sans',sans-serif;">Tập
+              II</span>
+            <span style="width:1px; height:12px; background:rgba(201,168,76,0.3);"></span>
+            <span
+              style="font-size:10px; font-weight:500; letter-spacing:0.15em; text-transform:uppercase; color:rgba(201,168,76,0.6); font-family:'DM Sans',sans-serif;">Năm
+              2024</span>
+          </div>
+        </div>
+
+        <h1 class="h-display reveal delay-1" style="max-width:780px; margin-bottom:1.5rem;">
+          Thuế BVMT, BĐS, BHYT<br />
+          <span style="color:var(--gold); font-style:italic;">Lợi ích Kinh Tế:</span><br />
+          <span style="font-size:0.65em; font-weight:300; color:#A09890;">Động lực hay Mâu thuẫn?</span>
+        </h1>
+
+        <p class="reveal delay-2"
+          style="font-size:1.05rem; color:#A09890; max-width:520px; line-height:1.8; margin-bottom:3rem; font-weight:300;">
+          Khám phá các cấu trúc ngầm định hình sự tương tác giữa cá nhân, doanh nghiệp và nhà nước trong guồng quay của
+          sự thịnh vượng xã hội.
+        </p>
+
+        <div class="reveal delay-3" style="display:flex; gap:1rem; flex-wrap:wrap;">
+          <button class="btn-gold"
+            onclick="document.querySelector('#sec-theory-content').scrollIntoView({behavior:'smooth'})">
+            <span class="material-symbols-outlined" style="font-size:14px;">auto_stories</span>
+            Khám Phá Luận Thuyết
+          </button>
+          <button class="btn-outline">
+            <span class="material-symbols-outlined" style="font-size:14px;">library_books</span>
+            Thư Viện Số
+          </button>
+        </div>
+
+        <!-- Scroll indicator -->
+        <div class="reveal delay-4" style="margin-top:5rem; display:flex; align-items:center; gap:1rem;">
+          <div
+            style="width:1px; height:60px; background:linear-gradient(to bottom, transparent, var(--gold)); animation: pulse-line 2s ease-in-out infinite;">
+          </div>
+          <span
+            style="font-size:10px; letter-spacing:0.22em; text-transform:uppercase; color:rgba(201,168,76,0.5); transform:rotate(0deg);">Cuộn
+            Xuống</span>
+        </div>
+      </div>
+
+      <!-- Hero stats strip -->
+      <div
+        style="position:absolute; right:clamp(1.5rem,5vw,4rem); bottom:5rem; z-index:10; display:flex; flex-direction:column; gap:2rem;"
+        class="hidden lg:flex">
+        <div style="text-align:right;">
+          <div
+            style="font-family:'Cormorant Garamond',serif; font-size:2.8rem; font-weight:600; color:var(--gold); line-height:1;">
+            3</div>
+          <div style="font-size:9px; letter-spacing:0.2em; text-transform:uppercase; color:#5C5650; margin-top:4px;">
+            Trục Tương Tác</div>
+        </div>
+        <div style="text-align:right;">
+          <div
+            style="font-family:'Cormorant Garamond',serif; font-size:2.8rem; font-weight:600; color:var(--gold); line-height:1;">
+            5</div>
+          <div style="font-size:9px; letter-spacing:0.2em; text-transform:uppercase; color:#5C5650; margin-top:4px;">
+            Phân Tích Chuyên Sâu</div>
+        </div>
+      </div>
+
+      <!-- Ticker -->
+      <div class="hero-ticker">
+        <div class="ticker-inner" id="ticker">
+          <!-- Filled by JS -->
+        </div>
+      </div>
+    </section>
+
+    <style>
+      @keyframes pulse-line {
+
+        0%,
+        100% {
+          opacity: 0.3;
+        }
+
+        50% {
+          opacity: 1;
+        }
+      }
+    </style>
+
+    <!-- ══════════════════════════════════
+         MARQUEE DIVIDER
+    ══════════════════════════════════ -->
+    <div class="marquee-wrap"
+      style="border-top:1px solid rgba(201,168,76,0.08); border-bottom:1px solid rgba(201,168,76,0.08); padding:14px 0; margin-top:0; margin-bottom:8rem; overflow:hidden;">
+      <div class="marquee-track" id="marquee-track">
+        <!-- filled by JS -->
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════
+         KHÁI NIỆM LỢI ÍCH KINH TẾ
+    ══════════════════════════════════ -->
+    <section id="sec-theory-content" style="padding:0 clamp(1.5rem,5vw,5rem); max-width:1400px; margin:0 auto 10rem;">
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:5rem; align-items:start;" class="grid-1-col-mobile">
+
+        <div>
+          <div class="section-eyebrow reveal" style="margin-bottom:1.5rem;">Mục Lục · Trang 123</div>
+          <h2 class="h-xl reveal delay-1"
+            style="margin-bottom:1.5rem; border-left:3px solid var(--gold); padding-left:1.5rem;">
+            Khái Niệm<br />Lợi Ích Kinh Tế
+          </h2>
+          <p class="reveal delay-2"
+            style="color:#A09890; line-height:1.85; font-size:1.05rem; font-weight:300; margin-bottom:2rem;">
+            Lợi ích kinh tế là hình thức biểu hiện của các quan hệ sản xuất, là động lực trực tiếp thúc đẩy sự vận động
+            của nền sản xuất xã hội. Nó không đơn thuần là con số, mà là sự phản ánh của các mối quan hệ xã hội trong
+            quá trình tái sản xuất.
+          </p>
+
+          <!-- Accordion -->
+          <div class="reveal delay-3">
+            <div class="accordion-item">
+              <div class="accordion-header" onclick="toggleAccordion(this)">
+                <span style="font-family:'Cormorant Garamond',serif; font-size:1.15rem;">Tại sao lợi ích kinh tế mang
+                  tính giai cấp?</span>
+                <span class="accordion-icon material-symbols-outlined">add</span>
+              </div>
+              <div class="accordion-body">
+                <p style="color:#A09890; line-height:1.8; font-size:0.95rem; padding-top:1rem;">
+                  Quan hệ sản xuất quy định ai nắm giữ tư liệu sản xuất và ai phải bán sức lao động. Sự phân tầng này
+                  tạo ra các nhóm có lợi ích mang tính hệ thống — không phải ngẫu nhiên mà là kết quả tất yếu của cấu
+                  trúc kinh tế.
+                </p>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <div class="accordion-header" onclick="toggleAccordion(this)">
+                <span style="font-family:'Cormorant Garamond',serif; font-size:1.15rem;">Lợi ích cá nhân có mâu thuẫn
+                  với lợi ích xã hội?</span>
+                <span class="accordion-icon material-symbols-outlined">add</span>
+              </div>
+              <div class="accordion-body">
+                <p style="color:#A09890; line-height:1.8; font-size:0.95rem; padding-top:1rem;">
+                  Đây là nghịch lý trung tâm của kinh tế học cổ điển. Adam Smith lập luận rằng "bàn tay vô hình" của thị
+                  trường biến lợi ích cá nhân thành lợi ích tập thể — nhưng điều này chỉ đúng khi thị trường hoàn hảo và
+                  không có ngoại ứng tiêu cực.
+                </p>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <div class="accordion-header" onclick="toggleAccordion(this)">
+                <span style="font-family:'Cormorant Garamond',serif; font-size:1.15rem;">Vai trò của nhà nước trong điều
+                  tiết lợi ích?</span>
+                <span class="accordion-icon material-symbols-outlined">add</span>
+              </div>
+              <div class="accordion-body">
+                <p style="color:#A09890; line-height:1.8; font-size:0.95rem; padding-top:1rem;">
+                  Nhà nước đóng vai trò kiến trúc sư — thiết lập khung khổ pháp lý, điều chỉnh ngoại ứng qua thuế/phí,
+                  và cung cấp hàng hoá công cộng mà thị trường tự do không thể đảm bảo tối ưu.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Feature Cards Grid -->
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem;">
+          <div class="glass bento-card glow-hover reveal delay-1" style="padding:2rem; border-radius:4px;">
+            <span class="material-symbols-outlined"
+              style="color:var(--gold); font-size:2rem; margin-bottom:1rem; display:block;">account_balance</span>
+            <h4 style="font-family:'Cormorant Garamond',serif; font-size:1.3rem; margin-bottom:0.75rem; color:#E8E4DC;">
+              Bản Chất</h4>
+            <p style="color:#5C5650; font-size:0.88rem; line-height:1.7;">Quan hệ xã hội giữa các chủ thể kinh tế, thể
+              hiện rõ tính giai cấp trong chiếm hữu.</p>
+          </div>
+          <div class="glass bento-card glow-hover reveal delay-2"
+            style="padding:2rem; border-radius:4px; margin-top:1.5rem; border-left:2px solid var(--gold);">
+            <span class="material-symbols-outlined"
+              style="color:var(--gold); font-size:2rem; margin-bottom:1rem; display:block;">trending_up</span>
+            <h4 style="font-family:'Cormorant Garamond',serif; font-size:1.3rem; margin-bottom:0.75rem; color:#E8E4DC;">
+              Động Lực</h4>
+            <p style="color:#5C5650; font-size:0.88rem; line-height:1.7;">Xung lực mạnh nhất thúc đẩy sáng tạo và tăng
+              năng suất lao động.</p>
+          </div>
+          <div class="glass bento-card glow-hover reveal delay-3"
+            style="padding:2rem; border-radius:4px; border-left:2px solid var(--gold);">
+            <span class="material-symbols-outlined"
+              style="color:var(--gold); font-size:2rem; margin-bottom:1rem; display:block;">share</span>
+            <h4 style="font-family:'Cormorant Garamond',serif; font-size:1.3rem; margin-bottom:0.75rem; color:#E8E4DC;">
+              Phân Phối</h4>
+            <p style="color:#5C5650; font-size:0.88rem; line-height:1.7;">Cơ chế xác định phần lợi ích mỗi chủ thể nhận
+              được dựa trên quyền sở hữu.</p>
+          </div>
+          <div class="glass bento-card glow-hover reveal delay-4"
+            style="padding:2rem; border-radius:4px; margin-top:1.5rem;">
+            <span class="material-symbols-outlined"
+              style="color:var(--gold); font-size:2rem; margin-bottom:1rem; display:block;">balance</span>
+            <h4 style="font-family:'Cormorant Garamond',serif; font-size:1.3rem; margin-bottom:0.75rem; color:#E8E4DC;">
+              Điều Tiết</h4>
+            <p style="color:#5C5650; font-size:0.88rem; line-height:1.7;">Can thiệp của quy luật khách quan để cân bằng
+              tư lợi và lợi ích xã hội.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════
+         ENGELS QUOTE
+    ══════════════════════════════════ -->
+    <section style="padding:0 clamp(1.5rem,5vw,5rem); max-width:1400px; margin:0 auto 10rem;">
+      <div class="quote-block reveal" style="border-radius:2px; text-align:center; max-width:900px; margin:0 auto;">
+        <blockquote
+          style="font-family:'Cormorant Garamond',serif; font-size:clamp(1.6rem,3vw,2.5rem); font-style:italic; line-height:1.4; margin-bottom:2.5rem; color:#E8E4DC;">
+          "Các quan hệ kinh tế của một xã hội nhất định biểu hiện trước hết dưới hình thức <em
+            style="color:var(--gold); font-style:normal;">lợi ích</em>."
+        </blockquote>
+        <div style="width:40px; height:1px; background:var(--gold); margin:0 auto 1rem; opacity:0.5;"></div>
+        <cite style="font-size:10px; letter-spacing:0.3em; text-transform:uppercase; color:#5C5650; font-style:normal;">
+          Ph. Ăng-ghen · Học Thuyết Kinh Tế, Trang 124
+        </cite>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════
+         GOLD RULE
+    ══════════════════════════════════ -->
+    <div style="max-width:1400px; margin:0 auto 10rem; padding:0 clamp(1.5rem,5vw,5rem);">
+      <div class="gold-rule"></div>
+    </div>
+
+    <!-- ══════════════════════════════════
+         CÁC TRỤC TƯƠNG TÁC
+    ══════════════════════════════════ -->
+    <section id="sec-dynamics" style="padding:0 clamp(1.5rem,5vw,5rem); max-width:1400px; margin:0 auto 10rem;">
+      <div style="display:flex; align-items:center; gap:1.5rem; margin-bottom:4rem;">
+        <h2 class="h-xl reveal">Các Trục Tương Tác Ngầm</h2>
+        <div style="height:1px; flex:1; background:linear-gradient(90deg, rgba(201,168,76,0.2), transparent);"></div>
+      </div>
+
+      <div style="display:grid; grid-template-columns:7fr 5fr; gap:1.5rem; margin-bottom:1.5rem;"
+        class="grid-1-col-mobile">
+
+        <!-- Worker & Employer -->
+        <div class="glass bento-card glow-hover reveal"
+          style="padding:3.5rem; position:relative; overflow:hidden; border-radius:4px;">
+          <span class="num-deco" style="right:-1rem; bottom:-2rem;">01</span>
+          <div style="position:relative; z-index:1;">
+            <div class="section-eyebrow" style="margin-bottom:1.5rem;">Trục Xã Hội</div>
+            <h3 class="h-md" style="margin-bottom:1.5rem;">Người Lao Động<br />&amp; Người Sử Dụng Lao Động</h3>
+            <p style="color:#A09890; line-height:1.8; font-size:1rem; margin-bottom:2.5rem; font-weight:300;">
+              Sự mâu thuẫn và thống nhất trong phân phối thu nhập. Một bản giao hưởng giữa vốn và lao động, nơi giá trị
+              thặng dư gặp gỡ nhu cầu an sinh căn bản.
+            </p>
+            <div style="display:flex; flex-direction:column; gap:0.75rem;">
+              <div
+                style="display:flex; align-items:center; gap:0.75rem; font-size:10px; letter-spacing:0.2em; text-transform:uppercase; color:#A09890;">
+                <div style="width:6px; height:6px; border-radius:50%; background:var(--gold); flex-shrink:0;"></div>
+                Đối kháng về lợi ích phân phối
+              </div>
+              <div
+                style="display:flex; align-items:center; gap:0.75rem; font-size:10px; letter-spacing:0.2em; text-transform:uppercase; color:#A09890;">
+                <div style="width:6px; height:6px; border-radius:50%; background:var(--gold); flex-shrink:0;"></div>
+                Thống nhất về vận hành tổng thể
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Business -->
+        <div class="glass bento-card reveal delay-1"
+          style="padding:3.5rem; border-left:3px solid var(--gold); position:relative; overflow:hidden; border-radius:4px;">
+          <span class="num-deco" style="right:-1rem; bottom:-2rem;">02</span>
+          <div style="position:relative; z-index:1;">
+            <div class="section-eyebrow" style="margin-bottom:1.5rem;">Trục Thị Trường</div>
+            <h3 class="h-md" style="margin-bottom:1.5rem;">Giới<br />Doanh Nghiệp</h3>
+            <p style="color:#A09890; line-height:1.8; font-size:1rem; font-weight:300; margin-bottom:2.5rem;">
+              Sự kết hợp tinh vi giữa hợp tác &amp; cạnh tranh. Kẻ thù của ngày hôm nay có thể là đối tác ngày mai.
+            </p>
+            <div
+              style="border-top:1px solid rgba(201,168,76,0.1); padding-top:1.5rem; display:flex; justify-content:space-between; align-items:center;">
+              <span style="font-size:9px; letter-spacing:0.2em; text-transform:uppercase; color:#5C5650;">Động Lực
+                02</span>
+              <span class="material-symbols-outlined" style="color:var(--gold);">trending_up</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Individual & Society -->
+      <div class="glass bento-card reveal" style="padding:0; overflow:hidden; border-radius:4px;">
+        <div style="display:grid; grid-template-columns:1fr 1fr; min-height:320px;" class="grid-1-col-mobile">
+          <div style="padding:3.5rem; display:flex; flex-direction:column; justify-content:center;">
+            <div class="section-eyebrow" style="margin-bottom:1.5rem;">Trục Triết Học</div>
+            <h3 class="h-md" style="margin-bottom:1.5rem;">Cá Nhân &amp; Xã Hội</h3>
+            <p style="color:#A09890; line-height:1.85; font-size:1rem; font-weight:300;">
+              Lợi ích cá nhân là nền tảng cho sự đóng góp xã hội. Khi mỗi cá nhân theo đuổi sự hoàn thiện riêng, họ vô
+              tình dệt nên tấm thảm thịnh vượng chung — một nghịch lý tuyệt đẹp của động lực thị trường.
+            </p>
+          </div>
+          <div style="position:relative; overflow:hidden; min-height:280px;">
+            <img
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuBV09rdj5a_wi7KG-f4s1OCJRkMZykEsP-UBONgoy1_B3nNhoYlv_T8hRujl2BPX2658xZ21EcO7tB2XZUXGuumO5z7cTuLAlGbS3lgS8KFQFUtFKeGJFi3gPgSUAzMRBkwYv5Ma7mOEVIzjGvtpjwAWcsGdtxzA-zYe5sKni9CsjTxNjD7wv9-zmmGT7Gcmv9_rEp3WW1Co0q21Rk30mjLGVf8nyOy00HEGlvJ9AAoeM4twVFM1z5BtoS2ii--dnElBkCMy9Eq9Ros"
+              alt=""
+              style="width:100%; height:100%; object-fit:cover; filter:grayscale(1) brightness(0.45); transition:transform 1s ease, filter 0.8s ease; position:absolute; inset:0;"
+              onmouseover="this.style.transform='scale(1.05)'; this.style.filter='grayscale(0) brightness(0.7)';"
+              onmouseout="this.style.transform='scale(1)'; this.style.filter='grayscale(1) brightness(0.45)';">
+            <div
+              style="position:absolute; inset:0; background:linear-gradient(to right, rgba(10,11,12,0.7), transparent);">
+            </div>
+            <div
+              style="position:absolute; bottom:1.5rem; right:1.5rem; border:1px solid rgba(201,168,76,0.3); padding:6px 14px; background:rgba(10,11,12,0.7); backdrop-filter:blur(8px);">
+              <span style="font-size:9px; letter-spacing:0.2em; text-transform:uppercase; color:var(--gold);">Lưu Trữ
+                Triết Lý</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════
+         CƠ CHẾ ĐIỀU HOÀ
+    ══════════════════════════════════ -->
+    <section style="padding:0 clamp(1.5rem,5vw,5rem); max-width:1400px; margin:0 auto 10rem;">
+      <div style="text-align:center; margin-bottom:4rem;">
+        <div class="section-eyebrow reveal" style="justify-content:center; margin-bottom:1rem;">Cơ Chế Điều Hoà</div>
+        <h3 class="h-xl reveal delay-1">Sức Mạnh Động Lực</h3>
+      </div>
+
+      <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:1.5rem;" class="grid-1-col-mobile">
+        <div class="glass bento-card glow-hover reveal" style="padding:3rem; text-align:center; border-radius:4px;">
+          <div
+            style="width:64px; height:64px; border-radius:50%; border:1px solid rgba(201,168,76,0.2); display:flex; align-items:center; justify-content:center; margin:0 auto 2rem; transition:all 0.5s;">
+            <span class="material-symbols-outlined" style="font-size:1.8rem; color:var(--gold);">bolt</span>
+          </div>
+          <h5
+            style="font-family:'Cormorant Garamond',serif; font-size:1.5rem; margin-bottom:1rem; color:#E8E4DC; text-transform:uppercase; letter-spacing:0.05em;">
+            Xung Lực Phục Hưng</h5>
+          <p style="color:#A09890; font-size:0.92rem; line-height:1.8; font-weight:300;">Kích thích tính năng động, sáng
+            tạo của các chủ thể kinh tế trong khai phá giá trị thặng dư mới.</p>
+        </div>
+        <div class="glass bento-card glow-hover reveal delay-2"
+          style="padding:3rem; text-align:center; border-radius:4px; margin-top:2rem;">
+          <div
+            style="width:64px; height:64px; border-radius:50%; border:1px solid rgba(201,168,76,0.2); display:flex; align-items:center; justify-content:center; margin:0 auto 2rem; transition:all 0.5s;">
+            <span class="material-symbols-outlined" style="font-size:1.8rem; color:var(--gold);">hub</span>
+          </div>
+          <h5
+            style="font-family:'Cormorant Garamond',serif; font-size:1.5rem; margin-bottom:1rem; color:#E8E4DC; text-transform:uppercase; letter-spacing:0.05em;">
+            Liên Kết Hệ Thống</h5>
+          <p style="color:#A09890; font-size:0.92rem; line-height:1.8; font-weight:300;">Kết nối các thành phần rời rạc
+            thành thể thống nhất dựa trên sự hài hoà mục tiêu dài hạn.</p>
+        </div>
+        <div class="glass bento-card glow-hover reveal delay-4"
+          style="padding:3rem; text-align:center; border-radius:4px;">
+          <div
+            style="width:64px; height:64px; border-radius:50%; border:1px solid rgba(201,168,76,0.2); display:flex; align-items:center; justify-content:center; margin:0 auto 2rem; transition:all 0.5s;">
+            <span class="material-symbols-outlined" style="font-size:1.8rem; color:var(--gold);">auto_awesome</span>
+          </div>
+          <h5
+            style="font-family:'Cormorant Garamond',serif; font-size:1.5rem; margin-bottom:1rem; color:#E8E4DC; text-transform:uppercase; letter-spacing:0.05em;">
+            Tự Động Điều Chỉnh</h5>
+          <p style="color:#A09890; font-size:0.92rem; line-height:1.8; font-weight:300;">Cỗ máy tự cân bằng thông qua
+            lăng kính theo đuổi lợi ích chung, dẫn dắt vô hình bởi nhu cầu.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════
+         THIẾT CHẾ VẬN HÀNH
+    ══════════════════════════════════ -->
+    <section style="padding:0 clamp(1.5rem,5vw,5rem); max-width:1400px; margin:0 auto 6rem;">
+      <div style="text-align:center; margin-bottom:4rem;">
+        <div class="section-eyebrow reveal" style="justify-content:center; margin-bottom:1rem;">Góc Nhìn</div>
+        <h2 class="h-xl reveal delay-1">Thiết Chế Vận Hành</h2>
+      </div>
+
+      <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:3rem; margin-bottom:5rem;"
+        class="grid-1-col-mobile">
+        <div style="text-align:center; padding:0 1.5rem;" class="reveal">
+          <div
+            style="width:56px; height:56px; border:1px solid rgba(201,168,76,0.3); border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto 2rem; background:rgba(26,28,30,0.8);">
+            <span class="material-symbols-outlined" style="color:var(--gold); font-size:1.5rem;">pan_tool_alt</span>
+          </div>
+          <h4
+            style="font-family:'Cormorant Garamond',serif; font-size:1.6rem; font-style:italic; margin-bottom:1rem; color:#E8E4DC;">
+            Bàn Tay Vô Hình</h4>
+          <p style="color:#A09890; line-height:1.8; font-size:0.92rem; font-weight:300;">Theo Adam Smith, sự tự tư của
+            cá nhân cuối cùng vô tình dẫn dắt nền kinh tế tới kết quả tối ưu cho toàn xã hội.</p>
+        </div>
+        <div style="text-align:center; padding:0 1.5rem;" class="reveal delay-2">
+          <div
+            style="width:56px; height:56px; border:1px solid rgba(201,168,76,0.3); border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto 2rem; background:rgba(26,28,30,0.8);">
+            <span class="material-symbols-outlined"
+              style="color:var(--gold); font-size:1.5rem;">account_balance_wallet</span>
+          </div>
+          <h4
+            style="font-family:'Cormorant Garamond',serif; font-size:1.6rem; font-style:italic; margin-bottom:1rem; color:#E8E4DC;">
+            Chính Sách Thuế/Phí</h4>
+          <p style="color:#A09890; line-height:1.8; font-size:0.92rem; font-weight:300;">Công cụ kép để điều tiết hành
+            vi. Thuế không chỉ là dòng máu ngân sách, mà là bánh lái điều chỉnh ngoại ứng xã hội.</p>
+        </div>
+        <div style="text-align:center; padding:0 1.5rem;" class="reveal delay-4">
+          <div
+            style="width:56px; height:56px; border:1px solid rgba(201,168,76,0.3); border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto 2rem; background:rgba(26,28,30,0.8);">
+            <span class="material-symbols-outlined" style="color:var(--gold); font-size:1.5rem;">gavel</span>
+          </div>
+          <h4
+            style="font-family:'Cormorant Garamond',serif; font-size:1.6rem; font-style:italic; margin-bottom:1rem; color:#E8E4DC;">
+            Vai Trò Nhà Nước</h4>
+          <p style="color:#A09890; line-height:1.8; font-size:0.92rem; font-weight:300;">Kiến trúc sư thiết lập khung
+            khổ pháp lý vững mạnh và sửa chữa kịp thời các thất bại của thị trường tự do.</p>
+        </div>
+      </div>
+
+      <!-- Adam Smith Quote -->
+      <div class="quote-block reveal" style="max-width:800px; margin:0 auto; text-align:center; border-radius:2px;">
+        <blockquote
+          style="font-family:'Cormorant Garamond',serif; font-size:clamp(1.2rem,2.5vw,1.7rem); font-style:italic; line-height:1.6; color:#E8E4DC; margin-bottom:2rem;">
+          "Không phải từ lòng nhân từ của người bán thịt, người nấu bia hay người làm bánh mà chúng ta có được bữa ăn
+          ngon, mà từ sự quan tâm của họ đến lợi ích của chính họ."
+        </blockquote>
+        <div style="width:40px; height:1px; background:var(--gold); margin:0 auto 1rem; opacity:0.5;"></div>
+        <cite
+          style="font-size:10px; letter-spacing:0.3em; text-transform:uppercase; color:rgba(201,168,76,0.7); font-style:normal;">—
+          Adam Smith, Của Cải Của Các Quốc Gia</cite>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════
+         GOLD RULE
+    ══════════════════════════════════ -->
+    <div style="max-width:1400px; margin:0 auto 10rem; padding:0 clamp(1.5rem,5vw,5rem);">
+      <div class="gold-rule"></div>
+    </div>
+
+    <!-- ══════════════════════════════════
+         THỰC TIỄN – THUẾ BĐS
+    ══════════════════════════════════ -->
+    <section id="sec-practice" style="padding:0 clamp(1.5rem,5vw,5rem); max-width:1400px; margin:0 auto 10rem;">
+
+      <div style="margin-bottom:5rem;">
+        <div class="section-eyebrow reveal" style="margin-bottom:1.5rem;">Nghiên Cứu Điển Hình &amp; Thực Tiễn</div>
+        <h2 class="h-display reveal delay-1" style="max-width:700px;">
+          Kiến Tạo Cấu Trúc<br />
+          <span style="color:var(--gold); font-style:italic;">Thịnh Vượng Mới</span>
+        </h2>
+        <p class="reveal delay-2"
+          style="color:#A09890; max-width:600px; line-height:1.8; font-size:1.05rem; font-weight:300; margin-top:1.5rem;">
+          Phân tích đa chiều về dự thảo Thuế Bất Động Sản Thứ Hai và bản đồ quy hoạch kinh tế số 2024–2026.
+        </p>
+      </div>
+
+      <h3 class="h-md reveal" style="margin-bottom:3rem; border-left:3px solid var(--gold); padding-left:1.5rem;">
+        Phân Tích: Thuế Bất Động Sản Thứ Hai
+      </h3>
+
+      <!-- Bento Grid -->
+      <div
+        style="display:grid; grid-template-columns:4fr 8fr; grid-template-rows:auto auto; gap:1.5rem; margin-bottom:1.5rem;"
+        class="grid-1-col-mobile">
+
+        <!-- Nhà nước -->
+        <div class="glass bento-card glow-hover reveal"
+          style="padding:2.5rem; border-radius:4px; display:flex; flex-direction:column; justify-content:space-between;">
+          <div>
+            <span class="material-symbols-outlined"
+              style="color:var(--gold); font-size:2rem; margin-bottom:1rem; display:block;">account_balance</span>
+            <h4 style="font-family:'Cormorant Garamond',serif; font-size:1.5rem; margin-bottom:1rem; color:#E8E4DC;">Nhà
+              Nước</h4>
+            <p style="color:#A09890; font-size:0.9rem; line-height:1.8; font-weight:300;">Tạo cơ chế điều tiết hợp lý
+              nguồn cung khan hiếm, tăng ngân sách bền vững thay vì dựa dẫm phí đất đai truyền thống.</p>
+          </div>
+          <div style="margin-top:2rem; border-top:1px solid rgba(201,168,76,0.1); padding-top:1rem;">
+            <span style="font-size:9px; letter-spacing:0.2em; text-transform:uppercase; color:var(--gold);">Mục Tiêu:
+              Công Bằng Xã Hội</span>
+          </div>
+        </div>
+
+        <!-- Doanh nghiệp -->
+        <div class="bento-card reveal delay-1"
+          style="border-radius:4px; overflow:hidden; position:relative; min-height:280px;">
+          <img
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuD0lTALCcYXBeMemIq-BAjN6a6CIUyv0tNLgH-U3fuVHrNi1MR5teJD_OyzmV9-XRbJHwhgSyUcmUsxWBujsopVznsN3npjS4vPYjd2OBAtjzmFVM_yhW4H61kKoEnwVhaDiuba244FIS2uzbKFEEyiolEXM95TtJGCkfecw_8pElZl55QUNy2C1HDxegYAEpxkV6dZJyHs7obYSrbBwkGWcoefRB43ulqvormfrsntTitaTeFqPbrlKg6GpUeKzZkm1LW8w1_85arv"
+            alt=""
+            style="width:100%; height:100%; object-fit:cover; filter:grayscale(1) brightness(0.3); position:absolute; inset:0; transition:filter 0.8s, transform 1s;"
+            onmouseover="this.style.filter='grayscale(0) brightness(0.5)'; this.style.transform='scale(1.03)';"
+            onmouseout="this.style.filter='grayscale(1) brightness(0.3)'; this.style.transform='scale(1)';">
+          <div
+            style="position:absolute; inset:0; background:linear-gradient(to top, rgba(10,11,12,0.95) 30%, transparent);">
+          </div>
+          <div style="position:absolute; bottom:0; left:0; right:0; padding:2.5rem;">
+            <h4
+              style="font-family:'Cormorant Garamond',serif; font-size:1.8rem; color:var(--gold); margin-bottom:0.75rem;">
+              Doanh Nghiệp &amp; Đầu Tư</h4>
+            <p
+              style="color:rgba(232,228,220,0.85); font-size:0.95rem; line-height:1.7; max-width:480px; font-weight:300;">
+              Sàng lọc các nhà đầu tư thực chất, ngăn nguồn vốn mắc kẹt, buộc dòng vốn chảy vào sản xuất sáng tạo thay
+              vì đầu cơ tài sản tĩnh.</p>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:1.5rem;" class="grid-1-col-mobile">
+        <!-- Người lao động -->
+        <div class="glass bento-card reveal delay-2"
+          style="padding:2.5rem; border-radius:4px; display:flex; gap:2rem; overflow:hidden;">
+          <div style="flex:1;">
+            <h4 style="font-family:'Cormorant Garamond',serif; font-size:1.5rem; margin-bottom:1rem; color:#E8E4DC;">
+              Người Lao Động</h4>
+            <p style="color:#A09890; font-size:0.9rem; line-height:1.8; margin-bottom:1.5rem; font-weight:300;">Giảm rào
+              cản tài chính vô hình, mở cơ hội sở hữu nhà ở thực sự cho tầng lớp người trẻ giữa áp lực lạm phát.</p>
+            <div
+              style="background:rgba(201,168,76,0.05); border:1px solid rgba(201,168,76,0.1); padding:1rem 1.25rem; border-radius:2px;">
+              <span style="font-size:0.88rem; color:rgba(201,168,76,0.8); font-style:italic;">"Cánh cửa hạn hẹp cho an
+                cư đã được nới rộng."</span>
+            </div>
+          </div>
+          <div style="width:130px; flex-shrink:0; border-radius:2px; overflow:hidden;" class="hidden md:block">
+            <img
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuAx7FE7R1c-rybjUfitDne_zD-rrdzUi8987-OB8WJosGbRsg1zjv9yGycaYGXcTx4p-HXgw-FewV2Q92XTNRmSNRokK7DEkohI-CgTfcQumbizV4Td09u8wKzaBs9tmxXgVSXuMY5dhs3iGfolGOyvjkL1-QUCMeaOf1LLUzw7tbjPDWr9ybDJe9G7g8o6sHCe8sf8Ur_VzDKuCz93BmVmft5uH-ObisxtbsmTATfux-T9g-QCeEEpEknH8sCx__eG88hu--IrC7m8"
+              alt="" style="width:100%; height:100%; object-fit:cover; filter:grayscale(1) brightness(0.6);">
+          </div>
+        </div>
+
+        <!-- Cấu trúc xã hội -->
+        <div class="glass bento-card reveal delay-3"
+          style="padding:2.5rem; border-left:4px solid var(--gold); border-radius:4px;">
+          <span class="material-symbols-outlined"
+            style="color:rgba(201,168,76,0.6); font-size:2.5rem; margin-bottom:1rem; display:block;">groups</span>
+          <h4 style="font-family:'Cormorant Garamond',serif; font-size:1.5rem; margin-bottom:1rem; color:#E8E4DC;">Cấu
+            Trúc Xã Hội</h4>
+          <p style="color:#A09890; font-size:0.9rem; line-height:1.85; font-weight:300;">Giảm thiểu phân hóa giàu nghèo
+            do chênh lệch tài sản, tái lập niềm tin tạo nên cấu trúc xã hội "Thời Gian Sâu" thịnh vượng và ổn định.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════
+         BIẾN ĐỘNG 2024–2026 với progress bars animated
+    ══════════════════════════════════ -->
+    <section style="padding:0 clamp(1.5rem,5vw,5rem); max-width:1400px; margin:0 auto 10rem;">
+      <div class="glass"
+        style="border-radius:8px; padding:clamp(2rem,5vw,5rem); position:relative; overflow:hidden; border-color:rgba(201,168,76,0.12);">
+        <!-- bg decoration -->
+        <div
+          style="position:absolute; top:0; right:-2rem; opacity:0.04; pointer-events:none; font-family:'Cormorant Garamond',serif; font-size:18rem; font-weight:700; color:var(--gold); line-height:1; user-select:none;">
+          ↑</div>
+
+        <h3 class="h-xl reveal" style="text-align:center; margin-bottom:4rem;">Biến Động Thực Tiễn 2024–2026</h3>
+
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:5rem; align-items:center;"
+          class="grid-1-col-mobile">
+
+          <!-- Left: Incentives -->
+          <div>
+            <div style="display:flex; align-items:center; gap:1rem; margin-bottom:1.5rem;">
+              <div style="height:1px; flex:1; background:linear-gradient(to right, transparent, rgba(201,168,76,0.5));">
+              </div>
+              <span style="font-size:9px; letter-spacing:0.2em; text-transform:uppercase; color:var(--gold);">Chuyển
+                Dịch Động Lực</span>
+            </div>
+            <h4 class="h-md reveal" style="margin-bottom:1.5rem;">Kỷ Nguyên Mới<br />Ưu Đãi Tài Thuế</h4>
+            <p class="reveal delay-1"
+              style="color:#A09890; line-height:1.8; font-size:1rem; font-weight:300; margin-bottom:2.5rem;">
+              Chính sách miễn thuế TNDN đột phá 4 năm đầu cho dự án AI &amp; Bán dẫn đang nhen nhóm tạo ra "Thung lũng
+              Silicon" tại Đông Nam Á.
+            </p>
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:2rem;" class="reveal delay-2">
+              <div style="border-left:2px solid var(--gold); padding-left:1.25rem;">
+                <div class="stat-num" data-target="15">0</div><span
+                  style="font-family:'Cormorant Garamond',serif; font-size:1.5rem; color:var(--gold);">%</span>
+                <p
+                  style="font-size:9px; letter-spacing:0.15em; text-transform:uppercase; color:#5C5650; margin-top:6px;">
+                  Thuế Suất Ưu Đãi</p>
+              </div>
+              <div style="border-left:2px solid rgba(201,168,76,0.3); padding-left:1.25rem;">
+                <div class="stat-num" data-target="2026">0</div>
+                <p
+                  style="font-size:9px; letter-spacing:0.15em; text-transform:uppercase; color:#5C5650; margin-top:6px;">
+                  Cột Mốc Bùng Nổ</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: E-commerce conflict -->
+          <div class="glass reveal delay-2" style="padding:2.5rem; position:relative; border-radius:4px;">
+            <div
+              style="position:absolute; top:-0.75rem; left:1.5rem; background:var(--gold); color:var(--ink); font-size:9px; font-weight:700; letter-spacing:0.2em; text-transform:uppercase; padding:5px 14px;">
+              Xung Đột Thương Mại</div>
+
+            <h4
+              style="font-family:'Cormorant Garamond',serif; font-size:1.6rem; color:#E8E4DC; margin:1.5rem 0 0.75rem;">
+              TikTok Shop vs. Shopee</h4>
+            <p style="color:#A09890; font-size:0.88rem; line-height:1.8; margin-bottom:2rem; font-weight:300;">
+              Cuộc chiến thu thuế đa nền tảng TMĐT: chuyển từ quản lý sổ sách thủ công sang kiểm soát dòng tiền tự động
+              qua API ngân hàng.
+            </p>
+
+            <div style="display:flex; flex-direction:column; gap:1.5rem;">
+              <div>
+                <div style="display:flex; justify-content:space-between; margin-bottom:0.6rem;">
+                  <span style="font-size:9px; letter-spacing:0.15em; text-transform:uppercase; color:#A09890;">Hệ Sinh
+                    Thái TikTok</span>
+                  <span style="color:var(--gold); font-size:0.85rem; font-weight:500;">+22% Thu Ngân Sách</span>
+                </div>
+                <div class="prog-bar">
+                  <div class="prog-fill" data-width="85"></div>
+                </div>
+              </div>
+              <div>
+                <div style="display:flex; justify-content:space-between; margin-bottom:0.6rem;">
+                  <span style="font-size:9px; letter-spacing:0.15em; text-transform:uppercase; color:#A09890;">Sự Thống
+                    Trị Shopee</span>
+                  <span style="color:rgba(201,168,76,0.7); font-size:0.85rem; font-weight:500;">+18% Tăng DNVVN</span>
+                </div>
+                <div class="prog-bar">
+                  <div class="prog-fill" data-width="70"></div>
+                </div>
+              </div>
+              <div>
+                <div style="display:flex; justify-content:space-between; margin-bottom:0.6rem;">
+                  <span style="font-size:9px; letter-spacing:0.15em; text-transform:uppercase; color:#A09890;">Tuân Thủ
+                    Thuế Số</span>
+                  <span style="color:rgba(201,168,76,0.6); font-size:0.85rem; font-weight:500;">+34% Cải Thiện</span>
+                </div>
+                <div class="prog-bar">
+                  <div class="prog-fill" data-width="60"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════
+         KẾT LUẬN
+    ══════════════════════════════════ -->
+    <section style="padding:0 clamp(1.5rem,5vw,5rem); max-width:1400px; margin:0 auto 10rem;">
+      <div class="bento-card"
+        style="display:grid; grid-template-columns:5fr 7fr; overflow:hidden; border:1px solid rgba(201,168,76,0.08); border-radius:4px;"
+        class="grid-1-col-mobile">
+        <div style="position:relative; min-height:450px; overflow:hidden;">
+          <img
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuAZcK-hf-2T1c3sH-DGRuBSUYWr14P4G62r7F3kebQfcQv1X4-z69lMsl_0vMxllOcXW0J6C5LYfe7PDbhrOVimiiWf5fv2fAthZ9wuic7a1noR0-QjHeRdOrZ4-S8QDvHBrjNG7T6_Q6M4h6kXE_AttHqZyol-lMgKul9XPycxb4W3uXRUfTqKI3kUr5BgjaLomS_qpZMRC74X8L4HwtvYAFAg1DQHOdR171he1JDUbB5enJOTUQFqDYxDZPmnMU0pT8X_xEqKfpOL"
+            alt="Cân bằng bền vững"
+            style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; filter:grayscale(1) brightness(0.45); transition:filter 1s, transform 1s;"
+            onmouseover="this.style.filter='grayscale(0) brightness(0.65)'; this.style.transform='scale(1.04)';"
+            onmouseout="this.style.filter='grayscale(1) brightness(0.45)'; this.style.transform='scale(1)';">
+          <div
+            style="position:absolute; inset:0; background:linear-gradient(to right, transparent 60%, rgba(10,11,12,0.5));">
+          </div>
+        </div>
+        <div style="padding:clamp(2rem,5vw,4.5rem); background:rgba(26,28,30,0.4);">
+          <div class="section-eyebrow reveal" style="margin-bottom:1.5rem;">
+            <span class="material-symbols-outlined" style="font-size:16px;">lightbulb</span>
+            Kết Luận Tổng Quan
+          </div>
+          <h2 class="h-xl reveal delay-1" style="margin-bottom:1.5rem;">
+            Cân Bằng Bền Vững Giữa<br />
+            <span style="color:var(--gold);">Tư Lợi &amp; Nghĩa Vụ</span>
+          </h2>
+          <p class="reveal delay-2"
+            style="color:#A09890; line-height:1.85; font-size:1rem; font-weight:300; margin-bottom:2rem;">
+            Các mối quan hệ kinh tế rốt cuộc không mang bản chất trò chơi có tổng bằng không. Nó là mạng lưới sâu thẳm
+            của các động lực tương hỗ, nơi điều kiện thịnh vượng được sinh sôi từ những tương tác cạnh tranh có tính
+            toán bài bản.
+          </p>
+          <div class="reveal delay-3"
+            style="border-left:2px solid rgba(201,168,76,0.4); padding:1.5rem 2rem; background:rgba(10,11,12,0.5); margin-bottom:2.5rem;">
+            <p
+              style="font-family:'Cormorant Garamond',serif; font-style:italic; font-size:1.1rem; line-height:1.7; color:#E8E4DC;">
+              "Thuế phí, chế tài tài chính không đơn thuần là những con số bị trừ tiêu cực — mà là bản giao hưởng vinh
+              danh sự sẻ chia và trách nhiệm trong kỷ nguyên đại tu 2024–2026."
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════
+         GOLD RULE
+    ══════════════════════════════════ -->
+    <div style="max-width:1400px; margin:0 auto 10rem; padding:0 clamp(1.5rem,5vw,5rem);">
+      <div class="gold-rule"></div>
+    </div>
+
+    <!-- ══════════════════════════════════
+         PHỤ LỤC AI
+    ══════════════════════════════════ -->
+    <section id="sec-appendix" style="padding:0 clamp(1.5rem,5vw,5rem); max-width:1400px; margin:0 auto 10rem;">
+
+      <div style="display:grid; grid-template-columns:1fr auto; align-items:start; gap:3rem; margin-bottom:4rem;"
+        class="grid-1-col-mobile">
+        <div>
+          <div class="section-eyebrow reveal" style="margin-bottom:1.5rem;">Phụ Lục 04 · Liêm Chính AI</div>
+          <h2 class="h-display reveal delay-1" style="margin-bottom:1.5rem;">
+            Sử Dụng Trí Tuệ AI<br />
+            <span style="color:var(--gold); font-style:italic;">&amp; Liêm Chính Học Thuật</span>
+          </h2>
+          <p class="reveal delay-2"
+            style="color:#A09890; max-width:580px; line-height:1.85; font-size:1rem; font-weight:300;">
+            Nhóm nghiên cứu 03 cam kết sự minh bạch tuyệt đối trong ứng dụng AI như những "vị thư ký" đắc lực hỗ trợ tư
+            duy rẽ nhánh, hoàn toàn không thay thế tính sáng tạo tự do và trách nhiệm trí tuệ cá nhân.
+          </p>
+        </div>
+        <div
+          style="width:160px; height:160px; border-radius:50%; overflow:hidden; border:1px solid rgba(201,168,76,0.2); padding:3px; flex-shrink:0;"
+          class="hidden md:block reveal delay-3">
+          <img
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDNNXdOfqdA12UIIOTwVeDmP4DKLfb-Bo8tIiIItSGNCEv6cZAHGWHpE_lsZ-XVp9kh0B6hAhKOlb2IpCxj41lYnaz_1XtHHeMUe6Q1rQZtex4SbFa9aIDkgGtI-5Izjub6W4gJ__a9ilo_0pHDenyuMEbAqad9sGAeGSy1gMu_v1QlEFtZEfip5N1MQCaorhXtmY-eTWoPdpzm8pcBg4tZnBINaoYBOLd5jHvI3hR5nbAgQG6O04LQNNPXoklGLK8MZbo_IliU4Evw"
+            alt=""
+            style="width:100%; height:100%; object-fit:cover; filter:grayscale(1) brightness(0.7); border-radius:50%; transition:transform 2s ease;"
+            onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+        </div>
+      </div>
+
+      <h3 class="h-md reveal" style="margin-bottom:2.5rem; border-left:3px solid var(--gold); padding-left:1.5rem;">Ma
+        Trận Công Cụ Ứng Dụng</h3>
+
+      <!-- AI Tools Grid -->
+      <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:1.5rem; margin-bottom:5rem;"
+        class="grid-1-col-mobile">
+        <div class="ai-card reveal" style="padding:2.5rem; border-radius:4px;">
+          <div style="display:flex; align-items:center; gap:1rem; margin-bottom:1.5rem;">
+            <div
+              style="width:44px; height:44px; background:rgba(201,168,76,0.08); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+              <span class="material-symbols-outlined" style="color:var(--gold); font-size:1.4rem;">auto_stories</span>
+            </div>
+            <h4 style="font-family:'Cormorant Garamond',serif; font-size:1.6rem; color:#E8E4DC;">NotebookLM</h4>
+          </div>
+          <p
+            style="font-size:9px; letter-spacing:0.2em; text-transform:uppercase; color:#5C5650; margin-bottom:0.75rem;">
+            ❖ Mục Đích Cốt Lõi</p>
+          <p style="color:#A09890; font-size:0.9rem; line-height:1.8; margin-bottom:1.5rem; font-weight:300; flex:1;">
+            Thu gom tổng hợp tài liệu phi cấu trúc, trích xuất luận điểm kinh tế trọng yếu từ hàng ngàn trang.</p>
+          <p
+            style="font-size:9px; letter-spacing:0.2em; text-transform:uppercase; color:#5C5650; margin-bottom:0.75rem;">
+            ❖ Câu Lệnh Điển Hình</p>
+          <div
+            style="background:rgba(10,11,12,0.8); border-left:2px solid rgba(201,168,76,0.4); padding:1rem 1.25rem; font-style:italic; color:#A09890; font-size:0.88rem; line-height:1.7;">
+            "Phân tích mâu thuẫn ẩn trong chuỗi lập luận của tác giả, xoay quanh học thuyết giá trị thặng dư trong bối
+            cảnh lạm phát..."
+          </div>
+        </div>
+
+        <div class="ai-card reveal delay-2"
+          style="padding:2.5rem; border-radius:4px; border-top:3px solid rgba(201,168,76,0.4);">
+          <div style="display:flex; align-items:center; gap:1rem; margin-bottom:1.5rem;">
+            <div
+              style="width:44px; height:44px; background:rgba(201,168,76,0.08); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+              <span class="material-symbols-outlined" style="color:var(--gold); font-size:1.4rem;">storm</span>
+            </div>
+            <h4 style="font-family:'Cormorant Garamond',serif; font-size:1.6rem; color:#E8E4DC;">Gemini 1.5 Pro</h4>
+          </div>
+          <p
+            style="font-size:9px; letter-spacing:0.2em; text-transform:uppercase; color:#5C5650; margin-bottom:0.75rem;">
+            ❖ Mục Đích Cốt Lõi</p>
+          <p style="color:#A09890; font-size:0.9rem; line-height:1.8; margin-bottom:1.5rem; font-weight:300; flex:1;">
+            Thực hiện phản biện logic sâu theo khung biện luận "Kẻ Đóng Vai Ác", tinh luyện ngôn ngữ tài chính.</p>
+          <p
+            style="font-size:9px; letter-spacing:0.2em; text-transform:uppercase; color:#5C5650; margin-bottom:0.75rem;">
+            ❖ Câu Lệnh Điển Hình</p>
+          <div
+            style="background:rgba(10,11,12,0.8); border-left:2px solid rgba(201,168,76,0.4); padding:1rem 1.25rem; font-style:italic; color:#A09890; font-size:0.88rem; line-height:1.7;">
+            "Hãy đóng vai nhà kinh tế học trường phái siêu cổ điển để phản biện triệt để các đoạn lập luận bên dưới..."
+          </div>
+        </div>
+
+        <div class="ai-card reveal delay-4" style="padding:2.5rem; border-radius:4px;">
+          <div style="display:flex; align-items:center; gap:1rem; margin-bottom:1.5rem;">
+            <div
+              style="width:44px; height:44px; background:rgba(201,168,76,0.08); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+              <span class="material-symbols-outlined" style="color:var(--gold); font-size:1.4rem;">schema</span>
+            </div>
+            <h4 style="font-family:'Cormorant Garamond',serif; font-size:1.6rem; color:#E8E4DC;">Công Cụ Dữ Liệu</h4>
+          </div>
+          <p
+            style="font-size:9px; letter-spacing:0.2em; text-transform:uppercase; color:#5C5650; margin-bottom:0.75rem;">
+            ❖ Mục Đích Cốt Lõi</p>
+          <p style="color:#A09890; font-size:0.9rem; line-height:1.8; margin-bottom:1.5rem; font-weight:300; flex:1;">
+            Kết nối các mạng lưới khái niệm kinh tế và trực quan hoá luồng tư duy triết học với đời sống.</p>
+          <p
+            style="font-size:9px; letter-spacing:0.2em; text-transform:uppercase; color:#5C5650; margin-bottom:0.75rem;">
+            ❖ Câu Lệnh Điển Hình</p>
+          <div
+            style="background:rgba(10,11,12,0.8); border-left:2px solid rgba(201,168,76,0.4); padding:1rem 1.25rem; font-style:italic; color:#A09890; font-size:0.88rem; line-height:1.7;">
+            "Tạo sơ đồ thực thể liên kết giữa 'Thời Gian Sâu' với cơ chế tích luỹ tư bản cá nhân bền vững."
+          </div>
+        </div>
+      </div>
+
+      <!-- Integrity Charter -->
+      <div
+        style="display:grid; grid-template-columns:1fr 1fr; border:1px solid rgba(201,168,76,0.08); border-radius:4px; overflow:hidden;"
+        class="grid-1-col-mobile">
+        <div style="position:relative; min-height:400px; overflow:hidden;">
+          <img
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuC97V-usYs-ASS9vhzMFlDr1yKwMKL4h0_aBLocuX7wlDWj3g-hkqFpQY4Mvog4NgYivse1k0-eEDRVlFu2fZofiFVAyTcOf4tb0UPRbBV49JzwdbkE1vLqZKva_vrMS2MwD7OqYjcHxBIFCY8Rd61-TnCjJg7A4wJRBAIEfzoYdXdUwZVTcVyq2yT0JmRErjh-sEPLWV4Gmax4-XNnuT56-CsXhlNqpPDq2tn1lUb7OmFnXs6moPqxBXxw0d6Vwocpsn9WTPRE_i-O"
+            alt=""
+            style="width:100%; height:100%; object-fit:cover; filter:grayscale(1) brightness(0.5); transition:transform 3s ease;"
+            onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+        </div>
+        <div style="padding:clamp(2rem,4vw,4rem); background:rgba(26,28,30,0.4);">
+          <h3 class="h-md reveal" style="margin-bottom:3rem;">Bản Hiến Chương Vô Giá</h3>
+          <ul style="display:flex; flex-direction:column; gap:2.5rem;">
+            <li style="display:flex; gap:1.25rem;" class="reveal delay-1">
+              <span class="material-symbols-outlined"
+                style="color:var(--gold); font-size:1.3rem; flex-shrink:0; margin-top:2px;">verified</span>
+              <div>
+                <p
+                  style="font-family:'Cormorant Garamond',serif; font-size:1.1rem; color:#E8E4DC; margin-bottom:0.5rem;">
+                  Giá Trị Của Bản Nguyên Tác</p>
+                <p style="color:#A09890; font-size:0.88rem; line-height:1.8; font-weight:300;">Mọi ý tưởng cốt lõi đều
+                  xuất phát thuần túy từ tranh biện 100% độc lập của hội viên Nhóm 03.</p>
+              </div>
+            </li>
+            <li style="display:flex; gap:1.25rem;" class="reveal delay-2">
+              <span class="material-symbols-outlined"
+                style="color:var(--gold); font-size:1.3rem; flex-shrink:0; margin-top:2px;">verified</span>
+              <div>
+                <p
+                  style="font-family:'Cormorant Garamond',serif; font-size:1.1rem; color:#E8E4DC; margin-bottom:0.5rem;">
+                  Quy Trình Kiểm Chứng Cứng</p>
+                <p style="color:#A09890; font-size:0.88rem; line-height:1.8; font-weight:300;">Dữ liệu định tính do AI
+                  cung cấp đều được đối chiếu chéo với tạp chí học thuật uy tín toàn cầu.</p>
+              </div>
+            </li>
+            <li style="display:flex; gap:1.25rem;" class="reveal delay-3">
+              <span class="material-symbols-outlined"
+                style="color:var(--gold); font-size:1.3rem; flex-shrink:0; margin-top:2px;">verified</span>
+              <div>
+                <p
+                  style="font-family:'Cormorant Garamond',serif; font-size:1.1rem; color:#E8E4DC; margin-bottom:0.5rem;">
+                  Tuyệt Đối Khẳng Định Trách Nhiệm</p>
+                <p style="color:#A09890; font-size:0.88rem; line-height:1.8; font-weight:300;">Tổ chức chịu hoàn toàn
+                  trách nhiệm về danh dự với từng ngôn từ báo cáo — mọi đóng góp máy móc chỉ là thứ yếu.</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ══════════════════════════════════
+       FOOTER
+  ══════════════════════════════════ -->
+  <footer
+    style="background:#070809; padding:5rem clamp(1.5rem,5vw,5rem) 3rem; border-top:1px solid rgba(201,168,76,0.08);">
+    <div style="max-width:1400px; margin:0 auto;">
+      <div style="display:grid; grid-template-columns:5fr 7fr; gap:4rem; margin-bottom:4rem; align-items:start;"
+        class="grid-1-col-mobile">
+        <div>
+          <div style="display:flex; align-items:center; gap:12px; margin-bottom:1.5rem;">
+            <div
+              style="width:36px; height:36px; border:1px solid rgba(201,168,76,0.3); display:flex; align-items:center; justify-content:center;">
+              <span class="material-symbols-outlined" style="color:var(--gold); font-size:18px;">account_balance</span>
+            </div>
+            <span
+              style="font-family:'Cormorant Garamond',serif; font-size:1.1rem; font-weight:600; letter-spacing:0.22em; color:var(--gold); text-transform:uppercase;">Triết
+              Lý Kinh Tế</span>
+          </div>
+          <p
+            style="color:#5C5650; font-size:0.9rem; line-height:1.85; max-width:380px; margin-bottom:2rem; font-weight:300;">
+            Không gian kiến thiết nền tảng triết học kinh tế vĩ mô. Nơi tư duy siêu cổ điển giao thoa với giá trị vĩnh
+            cửu của triết học nhân sinh.
+          </p>
+          <div
+            style="font-size:10px; letter-spacing:0.15em; text-transform:uppercase; color:#2A2C2E; border-left:1px solid #1A1C1E; padding-left:1rem;">
+            © MMXXIV TrinhTran · Triết Lý Kinh Tế. Bản quyền được bảo lưu.
+          </div>
+        </div>
+
+        <div style="display:flex; flex-wrap:wrap; gap:4rem; justify-content:flex-end;">
+          <div>
+            <p
+              style="font-size:9px; letter-spacing:0.2em; text-transform:uppercase; color:#2A2C2E; margin-bottom:1.5rem; padding-bottom:0.75rem; border-bottom:1px solid #1A1C1E;">
+              Nguồn Gốc Lý Luận</p>
+            <div style="display:flex; flex-direction:column; gap:1rem;">
+              <a href="#"
+                style="font-family:'Cormorant Garamond',serif; font-size:0.95rem; color:#5C5650; text-decoration:none; letter-spacing:0.05em;">Bàn
+                Tay Vô Hình</a>
+              <a href="#"
+                style="font-family:'Cormorant Garamond',serif; font-size:0.95rem; color:#5C5650; text-decoration:none; letter-spacing:0.05em;">Đạo
+                Đức Tư Bản</a>
+              <a href="#"
+                style="font-family:'Cormorant Garamond',serif; font-size:0.95rem; color:#5C5650; text-decoration:none; letter-spacing:0.05em;">Logic
+                Giá Trị Thặng Dư</a>
+            </div>
+          </div>
+          <div>
+            <p
+              style="font-size:9px; letter-spacing:0.2em; text-transform:uppercase; color:#2A2C2E; margin-bottom:1.5rem; padding-bottom:0.75rem; border-bottom:1px solid #1A1C1E;">
+              Góc Nhìn Mở Rộng</p>
+            <div style="display:flex; flex-direction:column; gap:1rem;">
+              <a href="#"
+                style="font-family:'Cormorant Garamond',serif; font-size:0.95rem; color:#5C5650; text-decoration:none; letter-spacing:0.05em;">Cấu
+                Trúc Thời Gian Sâu</a>
+              <a href="#"
+                style="font-family:'Cormorant Garamond',serif; font-size:0.95rem; color:#5C5650; text-decoration:none; letter-spacing:0.05em;">Giao
+                Thức Liêm Chính AI</a>
+              <a href="#"
+                style="font-family:'Cormorant Garamond',serif; font-size:0.95rem; color:#5C5650; text-decoration:none; letter-spacing:0.05em;">Liên
+                Hệ &amp; Bảo Mật</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="gold-rule" style="opacity:0.15;"></div>
+    </div>
+  </footer>
+
+  <!-- ══════════════════════════════════
+       RESPONSIVE GRID OVERRIDE
+  ══════════════════════════════════ -->
+  <style>
+    @media (max-width: 768px) {
+      .grid-1-col-mobile {
+        grid-template-columns: 1fr !important;
+      }
+    }
+  </style>
+
+  <!-- ══════════════════════════════════
+       JAVASCRIPT
+  ══════════════════════════════════ -->
+  <script>
+    // ─── CURSOR ───
+    const cursor = document.getElementById('cursor');
+    const cursorRing = document.getElementById('cursor-ring');
+    let mx = 0, my = 0, rx = 0, ry = 0;
+    document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+    function animCursor() {
+      rx += (mx - rx) * 0.15;
+      ry += (my - ry) * 0.15;
+      cursor.style.left = mx + 'px';
+      cursor.style.top = my + 'px';
+      cursorRing.style.left = rx + 'px';
+      cursorRing.style.top = ry + 'px';
+      requestAnimationFrame(animCursor);
+    }
+    animCursor();
+    document.querySelectorAll('a, button, .bento-card, .ai-card').forEach(el => {
+      el.addEventListener('mouseenter', () => {
+        cursor.style.width = '16px'; cursor.style.height = '16px';
+        cursorRing.style.width = '52px'; cursorRing.style.height = '52px';
+        cursorRing.style.borderColor = 'rgba(201,168,76,0.8)';
+      });
+      el.addEventListener('mouseleave', () => {
+        cursor.style.width = '10px'; cursor.style.height = '10px';
+        cursorRing.style.width = '36px'; cursorRing.style.height = '36px';
+        cursorRing.style.borderColor = 'rgba(201,168,76,0.5)';
+      });
+    });
+
+    // ─── READING PROGRESS ───
+    const prog = document.getElementById('reading-progress');
+    window.addEventListener('scroll', () => {
+      const scrolled = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
+      prog.style.width = scrolled + '%';
+    });
+
+    // ─── HEADER SCROLL ───
+    const header = document.getElementById('site-header');
+    window.addEventListener('scroll', () => {
+      header.classList.toggle('scrolled', window.scrollY > 60);
+    });
+
+    // ─── NAV ACTIVE STATE ───
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-link');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          navLinks.forEach(l => l.classList.remove('active'));
+          const active = document.querySelector(`.nav-link[href="#${e.target.id}"]`);
+          if (active) active.classList.add('active');
+        }
+      });
+    }, { threshold: 0.4 });
+    sections.forEach(s => observer.observe(s));
+
+    // ─── SCROLL REVEAL ───
+    const revealEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
+    const revealObs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('visible'); revealObs.unobserve(e.target); }
+      });
+    }, { threshold: 0.12 });
+    revealEls.forEach(el => revealObs.observe(el));
+
+    // ─── TICKER ───
+    const tickerItems = [
+      'Triết Lý Kinh Tế', 'Lợi Ích Xã Hội', 'Thuế BVMT', 'BĐS Thứ Hai', 'BHYT',
+      'Bàn Tay Vô Hình', 'Adam Smith', 'Ph. Ăng-ghen', 'Giá Trị Thặng Dư', 'Thị Trường Tự Do',
+      'Thuế Số TMĐT', 'AI & Bán Dẫn', 'Kỷ Nguyên Mới', 'Công Bằng Xã Hội'
+    ];
+    const tickerEl = document.getElementById('ticker');
+    // Duplicate for seamless loop
+    const doubled = [...tickerItems, ...tickerItems];
+    tickerEl.innerHTML = doubled.map(t =>
+      `<span style="display:inline-flex; align-items:center; gap:0; white-space:nowrap; flex-shrink:0;">` +
+      `<span style="display:inline-block; width:6px; height:6px; border-radius:50%; background:var(--gold); margin:0 2rem; flex-shrink:0;"></span>` +
+      `<span style="font-family:'DM Sans',sans-serif; font-size:11px; font-weight:500; letter-spacing:0.14em; text-transform:uppercase; color:rgba(201,168,76,0.55); white-space:nowrap;">${t}</span>` +
+      `</span>`
+    ).join('');
+
+    // ─── MARQUEE ───
+    const marqueeWords = [
+      'Triết Lý', '✦', 'Kinh Tế', '✦', 'Thịnh Vượng', '✦', 'Lợi Ích', '✦',
+      'Tự Do', '✦', 'Công Bằng', '✦', 'Sáng Tạo', '✦', 'Đổi Mới', '✦'
+    ];
+    const mt = document.getElementById('marquee-track');
+    // Duplicate 4x for seamless infinite loop
+    const rpt = [...marqueeWords, ...marqueeWords, ...marqueeWords, ...marqueeWords];
+    mt.innerHTML = rpt.map((w, i) => {
+      const isDiamond = w === '✦';
+      return `<span style="display:inline-block; font-family:'Cormorant Garamond',serif; font-size:${isDiamond ? '0.6rem' : '0.72rem'}; font-weight:500; letter-spacing:${isDiamond ? '0' : '0.28em'}; text-transform:uppercase; color:rgba(201,168,76,${isDiamond ? '0.2' : (i % 4 === 0 ? '0.3' : '0.12')}); padding:0 ${isDiamond ? '1rem' : '2rem'}; white-space:nowrap;">${w}</span>`;
+    }).join('');
+
+    // ─── ACCORDION ───
+    function toggleAccordion(header) {
+      const body = header.nextElementSibling;
+      const isOpen = header.classList.contains('open');
+      document.querySelectorAll('.accordion-header.open').forEach(h => {
+        h.classList.remove('open');
+        h.nextElementSibling.classList.remove('open');
+      });
+      if (!isOpen) { header.classList.add('open'); body.classList.add('open'); }
+    }
+
+    // ─── PROGRESS BARS ───
+    const progBars = document.querySelectorAll('.prog-fill');
+    const progObs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.style.width = e.target.dataset.width + '%';
+          progObs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.5 });
+    progBars.forEach(b => progObs.observe(b));
+
+    // ─── STAT COUNTER ANIMATION ───
+    function animateCounter(el, target, duration) {
+      const start = performance.now();
+      const startVal = 0;
+      function step(now) {
+        const elapsed = now - start;
+        const progress = Math.min(elapsed / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 4);
+        el.textContent = Math.round(startVal + eased * (target - startVal));
+        if (progress < 1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    }
+    const statEls = document.querySelectorAll('.stat-num[data-target]');
+    const statObs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          animateCounter(e.target, parseInt(e.target.dataset.target), 1800);
+          statObs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.5 });
+    statEls.forEach(el => statObs.observe(el));
+
+    // ─── MOBILE NAV ───
+    const mobileBtn = document.getElementById('mobile-menu-btn');
+    const mobileNav = document.getElementById('mobile-nav');
+    mobileBtn.addEventListener('click', () => { mobileNav.style.transform = 'translateX(0)'; });
+    function closeMobileNav() { mobileNav.style.transform = 'translateX(100%)'; }
+
+    // ─── PARALLAX HERO ───
+    window.addEventListener('scroll', () => {
+      const heroImg = document.getElementById('hero-img');
+      if (heroImg) heroImg.style.transform = `scale(1.05) translateY(${window.scrollY * 0.04}px)`;
+    });
+
+    // ─── AI CARD HOVER GLOW ───
+    document.querySelectorAll('.bento-card, .ai-card').forEach(card => {
+      card.addEventListener('mousemove', e => {
+        const rect = card.getBoundingClientRect();
+        const x = ((e.clientX - rect.left) / rect.width) * 100;
+        const y = ((e.clientY - rect.top) / rect.height) * 100;
+        card.style.background = `radial-gradient(circle at ${x}% ${y}%, rgba(201,168,76,0.04) 0%, rgba(26,28,30,0.6) 60%)`;
+      });
+      card.addEventListener('mouseleave', () => { card.style.background = ''; });
+    });
+  </script>
+
+</body>
+
+</html>
